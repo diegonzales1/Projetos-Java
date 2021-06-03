@@ -1,0 +1,34 @@
+.imgNav {
+	margin-top: 5px;
+	margin-left: 99px;
+}
+
+.buttonNovo {
+	margin-top: 10px;
+	margin-left: 8.5px;
+}
+
+.card-header-default {
+	background: gray91;
+}
+
+.ul-nav {
+	margin-top: 20px;
+}
+
+.card-default {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.textNav {
+	background: #DCDCDC;
+	width:1050px;
+	text-align: right;
+	font-size: 30px;
+}
+
+.tableNav {
+	margin: 0px 0px 0px 0px; 
+	padding: 0px 0px 0px 0px;
+}

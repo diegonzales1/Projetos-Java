@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{LayoutPadrao}">
+
+<head>
+<title>Imobiliaria DOGS - Cadastra Estado</title>
+</head>
+
+<body>
+	<section layout:fragment="conteudo">
+
+		<form class="form-inline" method="POST" action="/home/estado"
+			th:object="${estadoModel}">
+
+			<div class="container col-12">
+				<div class="card card-default">
+					<div class="card-header text-left">
+						<h3 class="card-title stretched-titulo">Cadastrar Estados</h3>
+						<a class="btn btn-link stretched-link "
+							href="/home/estado/listaEstados" style="position: relative;">
+							Voltar </a>
+					</div>
+					<div class="card-body">
+
+						<input type="hidden" th:field="*{codigo}" />
+
+						<!-- Messages -->
+						<div layout:insert="MensagemSalvo"></div>
+						<div layout:insert="MensagemErro"></div>
+					
+
+						<div class="form-group">
+							<label for="ufEstado" class="col-sm-2 control label">UF</label>
+							<div class="col-md-4 mb-2">
+								<input type="text" id="ufEstado" name="ufEstado"
+									class="input-default" th:field="*{ufEstado}" />
+							</div>
+						</div>
+						<br>
+						<div class="form-group">
+							<label for="nomeEstado" class="col-sm-2 control label">Estado</label>
+							<div class="col-md-4 mb-2">
+								<input type="text" id="nomeEstado" name="nomeEstado"
+									class="input-default" th:field="*{nomeEstado}" />
+							</div>
+						</div>
+
+						<!-- Save Button-->
+						<div class="card-footer">
+							<button type="submit" class="btn btn-success">Cadastrar</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</form>
+	</section>
+</body>
+</html>

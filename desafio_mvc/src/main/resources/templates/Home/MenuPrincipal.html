@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{LayoutPadrao}">
+
+<head>
+<title>Imobiliaria DOGS - Home</title>
+<link rel="stylesheet" type="text/css"
+	href="/css/stylemenuPrincipal.css" />
+</head>
+
+<body>
+	<section layout:fragment="conteudo">
+
+		<div class="card card-default">
+			<div class="card-header card-header-default">OPÇÕES</div>
+			<div class="card-body card-body-default">
+
+				<table>
+					<thead>
+						<tr>
+							<!-- Category button  -->
+							<th scope="col"><div class="card card-button card-body"
+									style="width: 18rem;">
+									<a href="/home/listaCategorias"> <img
+										src="/images/categoria.png"  height="80" width="80"
+										class="card-img-top"  alt="Categorias"></a>
+								</div>
+								</th>
+
+							<!-- Business button -->
+							<th scope="col">
+							
+								<div class="card card-body card-button" style="width: 18rem;">
+									<a href="/home/negocio/listaNegocios">
+									<img src="/images/negocio.png" height="80" width="80"
+										class="card-img-top" alt="Negocios"></a>
+								</div>
+							</th>
+
+
+							<!-- Immobile button -->
+							<th scope="col">
+								<div class="card card-body card-button" style="width: 18rem;">
+								<a href="/home/imovel/listaImoveis">
+									<img src="/images/imovel.png"  height="80" width="80"
+										class="card-img-top" alt="Imoveis"></a>
+								</div>
+							</th>
+
+							<!-- Room button -->
+							<th scope="col">
+								<div class="card card-body card-button" style="width: 18rem;">
+								<a href="/home/quarto/listaQuartos">
+									<img src="/images/quarto.png" height="80" width="80"
+										class="card-img-top" alt="Negocios"></a>
+								</div>
+							</th>
+						</tr>
+
+						<tr>
+							<!-- State button -->
+							<th scope="col">
+								<div class="card card-body card-button" style="width: 18rem;">
+								<a href="/home/estado/listaEstados">
+									<img src="/images/estado.png"  height="80" width="80"
+										class="card-img-top" alt="Estados"></a>
+								</div>
+							</th>
+
+							<!-- County button -->
+							<th scope="col">
+								<div class="card card-body card-button" style="width: 18rem;">
+								<a href="/home/municipio/listaMunicipios">
+									<img src="/images/municipio.png"  height="80" width="80"
+										class="card-img-top" alt="Municipios"></a>
+								</div>
+							</th>
+
+							<!-- District button -->
+							<th scope="col">
+								<div class="card card-body card-button" style="width: 18rem;">
+								<a href="/home/bairro/listaBairros">
+									<img src="/images/bairro.png"  height="80" width="80"
+										class="card-img-top" alt="Bairros"></a>
+								</div>
+							</th>
+
+						</tr>
+
+					</thead>
+				</table>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

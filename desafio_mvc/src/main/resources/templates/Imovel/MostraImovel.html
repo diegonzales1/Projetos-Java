@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{LayoutPadrao}">
+
+<head>
+<title>Imobiliaria DOGS - Lista Imóveis</title>
+</head>
+
+<body>
+	<section layout:fragment="conteudo">
+
+		<div class="card card-default">
+			<div class="card-header">
+				<h2>Imóveis</h2>
+			</div>
+
+			<div class="card-title">
+				<a href="/home/imovel/novoImovel"><button
+						class="buttonNovo btn btn-success" type="submit">Cadastrar
+						Novo Imóvel</button></a>
+
+			</div>
+
+			<div class="card-body">
+				<!-- Messages -->
+				<div layout:insert="MensagemSalvo"></div>
+
+				<div class="alert alert-danger" role="alert"
+					th:if="${!#strings.isEmpty(mensagemErro)}">
+					<span th:text="${mensagemErro}"></span>
+				</div>
+				<hr>
+
+				<div class="container table-responsive">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th scope="col" class="text-center"><b>Id Imovel</b></th>
+								<th scope="col"><b>Negócio</b></th>
+								<th scope="col"><b>Categoria</b></th>
+								<th scope="col"><b>Estado</b></th>
+								<th scope="col"><b>Quartos</b></th>
+								<th scope="col"><b>Ações</b></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="imovel : ${imoveis}">
+								<td class="text-center" th:text="${imovel.codigo}"></td>
+								<td class="text-center" th:text="${imovel.negocio.nomeNegocio}"></td>
+								<td class="text-center"
+									th:text="${imovel.categoria.nomeCategoria}"></td>
+								<td class="text-center" th:text="${imovel.estado.nomeEstado}"></td>
+								<td class="text-center"
+									th:text="${imovel.quarto.quantidadeQuarto}"></td>
+								<td class="text-center">
+									<!-- Edit Button --> <a class="btn btn-link btn-xs"
+									th:href="@{/home/imovel/listaImoveis/{codigo}(codigo=${imovel.codigo})}"
+									title="Editar" rel="tooltip" data-placement="top">
+										<button class="btn btn-success">
+											<img src="/images/pencil.svg" height="15"> <b>Editar</b>
+										</button>
+								</a> <!-- Delete Button --> <a class="btn btn-link btn-xs"
+									data-toggle="modal" data-target="#ConfirmaExclusaoModalImovel"
+									th:attr="data-codigo=${imovel.codigo}, data-imovel=${imovel.categoria.nomeCategoria}"
+									title="Excluir" rel="tooltip" data-placement="top">
+										<button class="btn btn-danger">
+											<img src="/images/x.svg" height="15"> <b>Excluir</b>
+										</button>
+
+								</a>
+								</td>
+							<tr>
+								<td scope="row" th:if="${#lists.isEmpty(imoveis)}">Nenhum
+									imóvel foi encontrado!</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div th:replace="Imovel/DialogoConfirmacaoExclusaoImovel"></div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

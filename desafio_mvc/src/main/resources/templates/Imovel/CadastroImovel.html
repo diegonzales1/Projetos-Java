@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{LayoutPadrao}">
+
+<head>
+<title>Imobiliaria DOGS - Cadastro Imível</title>
+</head>
+
+<body>
+	<section layout:fragment="conteudo">
+
+		<form class="form-inline" method="POST" action="/home/imovel"
+			th:object="${imovelModel}">
+
+			<div class="container col-12">
+				<div class="card card-default">
+					<div class="card-header text-left">
+						<h3 class="card-title stretched-titulo">Cadastrar Imovel</h3>
+						<a class="btn btn-link stretched-link "
+							href="/home/imovel/listaImoveis" style="position: relative;">
+							Voltar </a>
+					</div>
+					<div class="card-body">
+
+						<input type="hidden" th:field="*{codigo}" />
+
+						<!-- Messages -->
+						<div layout:insert="MensagemSalvo"></div>
+						<div layout:insert="MensagemErro"></div>
+					
+
+						<div class="form-group">
+							<label for="municipio" class="col-sm-2 control-label">Negócio</label>
+							<div class="col-sm-2">
+								<select class="form-control" th:field="*{negocio.codigo}">
+									<option value="1">Escolha um tipo de negócio</option>
+									<option th:each="negocio: ${negocios}"
+										th:value="${negocio.codigo}"
+										th:text="${negocio.nomeNegocio}"></option>
+								</select>
+							</div>
+						</div>
+						<br>
+						
+						<div class="form-group">
+							<label for="municipio" class="col-sm-2 control-label">Categoria</label>
+							<div class="col-sm-2">
+								<select class="form-control" th:field="*{categoria.codigo}">
+									<option value="1">Escolha uma Categoria</option>
+									<option th:each="categoria: ${categorias}"
+										th:value="${categoria.codigo}"
+										th:text="${categoria.nomeCategoria}"></option>
+								</select>
+							</div>
+						</div>
+						<br>
+
+						<div class="form-group">
+							<label for="municipio" class="col-sm-2 control-label">Estado</label>
+							<div class="col-sm-2">
+								<select class="form-control" th:field="*{estado.codigo}">
+									<option value="1">Escolha um Estado</option>
+									<option th:each="estado: ${estados}"
+										th:value="${estado.codigo}" th:text="${estado.nomeEstado}"></option>
+								</select>
+							</div>
+						</div>
+						<br>
+						
+							<div class="form-group">
+							<label for="municipio" class="col-sm-2 control-label">Quartos</label>
+							<div class="col-sm-2">
+								<select class="form-control" th:field="*{quarto.codigo}">
+									<option value="1">Escolha a quantidade de quartos</option>
+									<option th:each="quarto: ${quartos}"
+										th:value="${quarto.codigo}" th:text="${quarto.quantidadeQuarto}"></option>
+								</select>
+							</div>
+						</div>
+						<br>
+
+
+						<!-- Save Button-->
+						<div class="card-footer">
+							<button type="submit" class="btn btn-success">Cadastrar</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</form>
+	</section>
+</body>
+</html>

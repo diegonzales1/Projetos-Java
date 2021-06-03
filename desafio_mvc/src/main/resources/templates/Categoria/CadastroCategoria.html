@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{LayoutPadrao}">
+
+<head>
+<title>Imobiliaria DOGS - Cadastra Categoria</title>
+</head>
+
+<body>
+	<section layout:fragment="conteudo">
+
+		<form class="form-inline" method="POST" action="/home"
+			th:object="${categoriaModel}">
+
+			<div class="container col-12">
+				<div class="card card-default">
+					<div class="card-header text-left">
+						<h3 class="card-title stretched-titulo">Nova Categorias</h3>
+						<a class="btn btn-link stretched-link "
+							href="/home/listaCategorias" style="position: relative;">
+							Voltar </a>
+					</div>
+					<div class="card-body">
+
+						<input type="hidden" th:field="*{codigo}" />
+
+						<!-- Messages -->
+						<div layout:insert="MensagemSalvo"></div>
+						<div layout:insert="MensagemErro"></div>
+					
+
+
+						<div class="form-group">
+							<label for="nomeCategorias" class="col-sm-2 control label">Nome
+								da Categoria:</label>
+							<div class="col-md-4 mb-2">
+								<input type="text" id="nomeCategoria" name="nomeCategoria"
+									th:field="*{nomeCategoria}" class="input-default" />
+							</div>
+						</div>
+						<br>
+
+						<!-- Save Button -->
+						<div class="card-footer">
+							<button type="submit" class="btn btn-success">Cadastrar</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+		</form>
+	</section>
+</body>
+</html>

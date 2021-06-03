@@ -1,0 +1,19 @@
+.card-body-default{
+	height: 100%;
+	align-items: center; 
+	padding-left: 35px;
+	padding-right: 10px;
+}
+
+.card-button:hover{
+	border-radius: 5%;
+	border: 1.5px solid silver;
+	box-shadow: 2.5px 1.5px 1.5px grey;
+}
+
+.card-button {
+	margin-top: 25px;
+	margin-bottom: 20px;
+	margin-left: 5px;
+	margin-right: 20px;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{LayoutPadrao}">
+
+<head>
+<title>Imobiliaria DOGS - Cadastra Quartos</title>
+</head>
+
+<body>
+	<section layout:fragment="conteudo">
+
+		<form class="form-inline" method="POST" action="/home/quarto"
+			th:object="${quartoModel}">
+
+			<div class="container col-12">
+				<div class="card card-default">
+					<div class="card-header text-left">
+						<h3 class="card-title stretched-titulo">Cadastrar Quartos</h3>
+						<a class="btn btn-link stretched-link "
+							href="/home/quarto/listaQuartos" style="position: relative;">
+							Voltar </a>
+					</div>
+					<div class="card-body">
+
+						<input type="hidden" th:field="*{codigo}" />
+
+						<!-- Messages -->
+						<div layout:insert="MensagemSalvo"></div>
+						<div layout:insert="MensagemErro"></div>
+						
+
+						<div class="form-group">
+							<label for="quantidadeQuarto" class="col-sm-2 control label">Quantidade
+								de Quartos:</label>
+							<div class="col-md-4 mb-2">
+								<input type="text" id="quantidadeQuarto" name="quantidadeQuarto"
+									class="input-default" th:field="*{quantidadeQuarto}" />
+							</div>
+						</div>
+						<br>
+
+						<!-- Save Button-->
+						<div class="card-footer">
+							<button type="submit" class="btn btn-success">Cadastrar</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</form>
+	</section>
+</body>
+</html>

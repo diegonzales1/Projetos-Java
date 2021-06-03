@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{LayoutPadrao}">
+
+<head>
+<title>Imobiliaria DOGS - Lista Municipios</title>
+</head>
+
+<body>
+	<section layout:fragment="conteudo">
+
+		<div class="card card-default">
+			<div class="card-header">
+				<h2>Municipios</h2>
+			</div>
+
+			<div class="card-title">
+				<a href="/home/municipio/novoMunicipio"><button
+						class="buttonNovo btn btn-success" type="submit">Cadastrar
+						Novo Municipio</button></a>
+
+				<hr>
+				<br>
+				<!-- Search Box -->
+				<table class="table table-bordered table-striped">
+
+					<thead>
+
+						<tr>
+							<th scope="col">
+								<form class="form-initial" method="GET"
+									action="/home/municipio/listaMunicipios" th:object="${filtro}">
+									<div class="input-group">
+										<input class="form-control"
+											placeholder="Qual o municipio esta procurando?"
+											autofocus="autofocus" th:field="*{nomeMunicipio}"></input> <span
+											class="input-group-btn"> <!-- Button Search -->
+											<button type="submit" class="btn btn-default">
+												<img src="/images/search.svg" height="15">
+											</button>
+										</span>
+									</div>
+								</form>
+							</th>
+
+						</tr>
+					</thead>
+				</table>
+
+			</div>
+
+			<div class="card-body">
+				<!-- Messages -->
+				<div layout:insert="MensagemSalvo"></div>
+
+				<div class="alert alert-danger" role="alert"
+					th:if="${!#strings.isEmpty(mensagemErro)}">
+					<span th:text="${mensagemErro}"></span>
+				</div>
+				<hr>
+
+				<div class="container table-responsive">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th scope="col" class="text-center"><b>Id Município</b></th>
+								<th scope="col"><b>Município</b></th>
+								<th scope="col"><b>Estado</b></th>
+								<th scope="col"><b>Ações</b></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="municipio : ${municipios}">
+								<td class="text-center" th:text="${municipio.codigo}"></td>
+								<td class="text-center" th:text="${municipio.nomeMunicipio}"></td>
+								<td class="text-center" th:text="${municipio.estado.nomeEstado}"></td>
+								<td class="text-center">
+									<!-- Edit Button --> <a class="btn btn-link btn-xs"
+									th:href="@{/home/municipio/listaMunicipios/{codigo}(codigo=${municipio.codigo})}"
+									title="Editar" rel="tooltip" data-placement="top">
+										<button class="btn btn-success">
+											<img src="/images/pencil.svg" height="15"> <b>Editar</b>
+										</button>
+								</a> <!-- Delete Button --> <a class="btn btn-link btn-xs"
+									data-toggle="modal"
+									data-target="#ConfirmaExclusaoModalMunicipio"
+									th:attr="data-codigo=${municipio.codigo}, data-municipio=${municipio.nomeMunicipio}"
+									title="Excluir" rel="tooltip" data-placement="top">
+										<button class="btn btn-danger">
+											<img src="/images/x.svg" height="15"> <b>Excluir</b>
+										</button>
+
+								</a>
+								</td>
+							<tr>
+								<td scope="row" th:if="${#lists.isEmpty(municipios)}">Nenhum
+									município foi encontrado!</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div th:replace="Municipio/DialogoConfirmacaoExclusaoMunicipio"></div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
