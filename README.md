@@ -1,5 +1,4 @@
 # Projetos-Java
-Treinando java com Spring Boot, Security e MVC. 
 
 [POO](https://github.com/diegonzales1/Projetos-Java/tree/main/ex_poo)
 
