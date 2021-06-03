@@ -1,0 +1,48 @@
+.titulo {
+	color: black;
+	font-family: sans-serif;
+	font-size: 30px;
+	text-shadow: 1.5px 1.8px 0.9px white;
+}
+
+.card-default {
+	margin-top: 10px;
+	margin-left:10px;
+	margin-right:10px;
+	box-shadow: 0.5px 2px 4px grey;
+}
+
+body{
+	align-items: center;
+	background: FloralWhite;
+}
+
+.card-footer{
+	align-items: flex-end;
+}
+
+.stretched-link {
+	float: right;
+	padding-top: 5px;
+}
+
+.stretched-titulo {
+	float: left;
+	padding: 0px;
+	padding-top: 5px;
+}
+
+.stretched-button {
+	float:right;
+	height: 50px;
+	width: 100px;
+}
+
+.navbar {
+	background: Seashell;
+}
+
+.alert{
+	margin-top: 0px;
+}
+

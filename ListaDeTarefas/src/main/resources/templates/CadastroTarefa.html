@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{LayoutPadrao}">
+
+<head>
+<title>Task List - Cadastro Tarefa</title>
+</head>
+
+<body>
+
+	<section layout:fragment="conteudo">
+		<form class="form-inline" method="POST" action="/tarefas"
+			th:object="${tarefa}">
+
+			<div class="container col-12">
+						<div class="card card-default">
+							<div class="card-header text-left">
+								<h3 class="card-title stretched-titulo">Nova tarefa</h3>
+								<a class="btn btn-link stretched-link " href="/tarefas"
+									style="position: relative;"> <img src="/images/voltar.svg"
+									width="30" height="30" class="d-inline-block align-top"
+									alt="Logo">
+
+								</a>
+							</div>
+							<div class="card-body">
+								<input type="hidden" th:field="*{codigo}" />
+								<!-- Mensagens de Sucesso ou de Erro-->
+								<div layout:insert="MensagemGeral"></div>
+								<div layout:insert="MensagemErro"></div>
+
+
+								<!-- Descrição -->
+								<div class="form-check">
+									<label class="form-check-label" for="descricao">
+										Descrição: &nbsp; </label> <input type="text"
+										class="form-control col-sm-8" id="descricao" name="descricao"
+										th:field="*{descricao}"
+										th:classappend="${#fields.hasErrors('descricao')} ? 'form-control is-invalid'">
+								</div>
+								<br>
+
+								<!-- Data Final -->
+								<div class="form-check ">
+									<label class="form-check-label" for="dataFinal">Data
+										Final: &nbsp; </label> <input type="text" class="form-control"
+										th:field="*{dataFinal}" id="dataFinal" name="dataFinal"
+										th:classappend="${#fields.hasErrors('dataFinal')} ? 'form-control is-invalid'"
+										data-provide="datepicker" data-date-format="dd/mm/yyyy"
+										data-date-language="pt-BR" data-date-autoclose="true"
+										data-date-today-highlight="true"
+										data-date-orientation="bottom">
+								</div>
+								<br>
+
+								<!-- Quem deve fazer -->
+								<div class="form-check">
+									<label class="form-check-label" for="status">Status:
+										&nbsp; </label> <select id="status" name="status">
+										<option th:each="status: ${todosStatusTarefa}"
+											th:field="*{status}" th:value="${status}"
+											th:text="${status.descricao}"></option>
+									</select>
+								</div>
+
+								<br> <br>
+
+								<!-- Botão Salvar -->
+								<div class="card-footer">
+									<button type="submit" class="btn btn-primary stretched-button">Salvar</button>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+		</form>
+	</section>
+</body>
+</html>

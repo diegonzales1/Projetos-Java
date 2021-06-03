@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{LayoutPadrao}">
+
+<head>
+<title>Task List - Cadastro Tarefa</title>
+</head>
+<body>
+	<section layout:fragment="conteudo">
+
+		<!-- Body título -->
+		<div class="container col-12">
+			<div class="card card-default">
+
+				<div class="card-header">
+					<div class="clearfix">
+						<h3 class="card-title stretched-titulo">Pesquisa Tarefas</h3>
+						<a class="btn btn-link stretched-link" href="/tarefas/nova"
+							style="position: relative;"> <img src="/images/nova.svg"
+							width="30" height="30" class="d-inline-block align-top"
+							alt="Logo">
+						</a>
+
+					</div>
+				</div>
+
+				<!-- Body corpo -->
+				<div class="card-body">
+
+					<div class="table-responsive">
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th scope="col" class="text-center">#</th>
+									<th scope="col">Descrição</th>
+									<th scope="col">Data Final</th>
+									<th scope="col">Status</th>
+									<th scope="col"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="tarefa, count : ${tarefas}">
+									<td scope="row" class="text-center" th:text="${tarefa.codigo}"></td>
+									<td th:text="${tarefa.descricao}"></td>
+									<td class="text-center" th:text="${tarefa.dataFinal}"></td>
+									<td class="text-center" th:attr="data-role=${tarefa.codigo}"><span
+										class="Label badge" th:text="${tarefa.status.descricao}"
+										th:classappend="${tarefa.fazer ? 'badge-danger' : 'badge-success'}">
+									</span></td>
+
+									<td class="text-center">
+										<!-- Botão Editar --> <a class="btn btn-link btn-xs"
+										th:href="@{/tarefas/{codigo}(codigo=${tarefa.codigo})}"
+										title="Editar" rel="tooltip" data-placement="top"> <img
+											src="/images/editar.svg" height="15">
+									</a> <!-- Botão Excluir --> <a class="btn btn-link btn-xs"
+										data-toggle="modal" data-target="#ConfirmaExclusaoModal"
+										th:attr="data-codigo=${tarefa.codigo}, data-descricao=${tarefa.descricao}"
+										title="Excluir" rel="tooltip" data-placement="top"> <img
+											src="/images/x.svg" height="12">
+									</a> <!-- Botao Confirma --> <a
+										class="btn btn-link btn-xs js-atualizar-status"
+										th:if="${tarefa.fazer}" title="Confirmar Tarefa" rel="tooltip"
+										data-placement="top" th:attr="data-codigo=${tarefa.codigo}"
+										th:href="@{/tarefas/{codigo}/confirmar(codigo=${tarefa.codigo})}">
+
+											<img src="/images/task.svg" height="15">
+									</a>
+									</td>
+								</tr>
+								<tr>
+									<td scope="row" th:if="${#lists.isEmpty(tarefas)}">Nenhuma
+										tarefa foi encontrada</td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+				</div>
+
+				<div th:replace="DialogoExclusao"></div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
