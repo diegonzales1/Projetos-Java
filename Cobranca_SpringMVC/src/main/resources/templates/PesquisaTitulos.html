@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{LayoutPadrao}">
+
+<head>
+<title>Pesquisa de Títulos</title>
+</head>
+<body>
+	<section layout:fragment="conteudo">
+		<div layout:insert="MensagemGeral"></div>
+
+
+		<!-- Body título -->
+		<div class="card card-default">
+			<div class="card-header">
+				<div class="clearfix">
+					<h1 class="card-title stretched-titulo">Pesquisa de títulos</h1>
+					<a class="btn btn-link stretched-link" href="/titulos/novo"
+						style="position: relative;">Novo título</a>
+				</div>
+			</div>
+
+			<!-- Body corpo -->
+			<div class="card-body">
+
+				<!-- Caixa de Pesquisa -->
+				<form method="GET" class="form-horizontal" action="/titulos"
+					th:object="${filtro}">
+					<div class="form-group">
+						<div class="col-md-6">
+							<div class="input-group">
+								<input class="form-control"
+									placeholder="Qual título você está procurando?"
+									autofocus="autofocus" th:field="*{descricao}"></input> <span
+									class="input-group-btn">
+									<button type="submit" class="btn btn-default">
+										<img src="/images/search.svg" height="15">
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</form>
+
+				<div class="table-responsive">
+					<!-- Colunas -->
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Descrição</th>
+								<th scope="col">Data de Vencimento</th>
+								<th scope="col">Valor</th>
+								<th scope="col">Status</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="titulo : ${titulos}">
+								<td scope="row" class="text-center" th:text="${titulo.codigo}"></td>
+								<td th:text="${titulo.descricao}"></td>
+								<td class="text-center" th:text="${{titulo.dataVencimento}}"></td>
+								<td class="text-right" th:text="|R$ ${{titulo.valor}}|"></td>
+								<td class="text-center" th:attr="data-role=${titulo.codigo}">
+									<span class="label badge" th:text="${titulo.status.descricao}"
+									th:classappend="${titulo.pendente ? 'badge-danger' : 'badge-success'}"></span>
+								</td>
+								<td class="text-center">
+									<!-- Botao Editar --> <a class="btn btn-link btn-xs"
+									th:href="@{/titulos/{codigo}(codigo=${titulo.codigo})}"
+									title="Editar" rel="tooltip" data-placement="top"> <img
+										src="/images/pencil.svg" height="15">
+
+								</a> <!-- Botao Exclusao --> <a class="btn btn-link btn-xs"
+									data-toggle="modal" data-target="#confirmacaoExclusaoModal"
+									th:attr="data-codigo=${titulo.codigo}, data-descricao=${titulo.descricao}"
+									title="Excluir" rel="tooltip" data-placement="top"> <img
+										src="/images/x.svg" height="15">
+								</a> <!-- Botao Confirma Pagamento --> <a
+									class="btn btn-link btn-xs js-atualizar-status"
+									th:if="${titulo.pendente}" title="Receber" rel="tooltip"
+									data-placement="top" th:attr="data-codigo=${titulo.codigo}"
+									th:href="@{/titulos/{codigo}/receber(codigo=${titulo.codigo})}">
+
+										<img src="/images/task.svg" height="15">
+								</a>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row" th:if="${#lists.isEmpty(titulos)}">Nenhum
+									título foi encontrado</th>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+
+
+			<div th:replace="DialogoConfirmacaoExclusao"></div>
+
+		</div>
+	</section>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="LayoutPadrao">
+<head>
+<title>Cadastro de Título</title>
+</head>
+
+
+<!-- Body -->
+<section layout:fragment="conteudo">
+	<form class="form-horizontal" method="POST" action="/titulos"
+		th:object="${titulo}">
+
+		<!-- Mensagens de Sucesso ou de Erro-->
+		<div layout:insert="MensagemGeral"></div>
+		<div layout:insert="MensagemErro"></div>
+
+		<div class="card card-default">
+			<div class="card-header">
+				<div class="clearfix">
+					<h1 class="card-title stretched-titulo">Novo Título</h1>
+					<a class="btn btn-link stretched-link " href="/titulos"
+						style="position: relative;">Voltar para pesquisa</a>
+				</div>
+			</div>
+
+
+			<div class="card-body">
+
+				<!-- Pega o código caso esteja editando, senao fica como null -->
+				<input type="hidden" th:field="*{codigo}" />
+
+				<div class="form-group">
+					<label for="descricao" class="col-sm-2 control label">Descrição</label>
+					<div class="col-md-4 mb-2">
+						<input type="text" class="form-control" id="descricao"
+							th:field="*{descricao}"
+							th:classappend="${#fields.hasErrors('descricao')} ? 'form-control is-invalid'" />
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label for="dataVecimento" class="col-md-2 mb-2 control-label">Data
+						de Vencimento</label>
+					<div class="col-md-2 mb-2">
+						<input type="text" class="form-control" id="dataVencimento"
+							th:field="*{dataVencimento}"
+							th:classappend="${#fields.hasErrors('dataVencimento')} ? 'form-control is-invalid'"
+							data-provide="datepicker" data-date-format="dd/mm/yyyy"
+							data-date-language="pt-BR" data-date-autoclose="true"
+							data-date-today-highlight="true" data-date-orientation="bottom" />
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label for="valor" class="col-md-4 control-label">Valor</label>
+					<div class="col-md-2 mb-2">
+						<input type="text" class="form-control js-currency" id="valor"
+							th:field="*{valor}"
+							th:classappend="${#fields.hasErrors('valor')} ? 'form-control is-invalid'"  />
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label for="status" class="col-sm-2 control-label">Status</label>
+					<div class="col-sm-2">
+						<select class="form-control" th:field="*{status}">
+							<option th:each="status: ${todosStatusTitulo}"
+								th:value="${status}" th:text="${status.descricao}"></option>
+						</select>
+					</div>
+				</div>
+
+
+				<!-- Botão Salvar -->
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</section>
+
+</html>
